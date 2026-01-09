@@ -1,8 +1,8 @@
-package Class002;
+package Class006;
 
 import java.util.Arrays;
 
-public class Code01_FindNumber {
+public class Code02_FindLeft {
     public static void main(String[] args) {
         int N = 100;
         int V = 1000;
@@ -13,7 +13,7 @@ public class Code01_FindNumber {
             int[] arr = randomArray(n, V);
             Arrays.sort(arr);
             int num = (int) (Math.random() * V);
-            if (right(arr, num) != exist(arr, num)) {
+            if (right(arr, num) != findLeft(arr, num)) {
                 System.out.println("Error!");
             }
         }
@@ -29,33 +29,26 @@ public class Code01_FindNumber {
         return arr;
     }
 
-
-    // For validation
-    public static boolean right(int[] sortedArr, int num) {
-        for (int cur : sortedArr) {
-            if (cur == num) {
-                return true;
-            }
+    public static int right(int[] arr, int num) {
+        for (int i = 0; i < arr.length; ++i) {
+            if (arr[i] >= num) return i;
         }
-        return false;
+        return -1;
     }
 
-    public static boolean exist(int[] arr, int num) {
-        if (arr == null && arr.length == 0) {
-            return false;
-        }
+    public static int findLeft(int[] arr, int num) {
         int n = arr.length;
         int left = 0, right = n - 1;
+        int ans = -1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            if (arr[mid] == num) {
-                return true;
-            } else if (arr[mid] < num) {
-                left = mid + 1;
-            } else {
+            if (arr[mid] >= num) {
+                ans = mid;
                 right = mid - 1;
+            } else {
+                left = mid + 1;
             }
         }
-        return false;
+        return ans;
     }
 }

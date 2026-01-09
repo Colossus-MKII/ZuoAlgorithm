@@ -1,4 +1,4 @@
-package Class002;
+package Class006;
 
 public class Code04_FindPeakElement {
     public static int findPeakElement(int[] arr) {

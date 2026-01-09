@@ -1,10 +1,8 @@
-package Class002;
+package Class006;
 
-import java.security.UnrecoverableEntryException;
 import java.util.Arrays;
-import java.util.function.IntPredicate;
 
-public class Code02_FindLeft {
+public class Code03_FindRight {
     public static void main(String[] args) {
         int N = 100;
         int V = 1000;
@@ -15,8 +13,8 @@ public class Code02_FindLeft {
             int[] arr = randomArray(n, V);
             Arrays.sort(arr);
             int num = (int) (Math.random() * V);
-            if (right(arr, num) != findLeft(arr, num)) {
-                System.out.println("Error!");
+            if (right(arr, num) != findRight(arr, num)) {
+                System.out.println("Error");
             }
         }
         System.out.println("Test End");
@@ -26,29 +24,30 @@ public class Code02_FindLeft {
         int[] arr = new int[n];
         for (int i = 0; i < n; ++i) {
             int flag = (Math.random() < 0.5) ? 1 : -1;
-            arr[i] = (int) (Math.random() * v) * flag;
+            arr[i] = (int) (Math.random() * v) *flag;
         }
         return arr;
     }
 
-    public static int right(int[] arr, int num) {
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i] >= num) return i;
+    public  static int right(int[] arr, int num) {
+        for (int i = arr.length - 1; i >= 0; --i) {
+            if (arr[i] <= num) {
+                return i;
+            }
         }
         return -1;
     }
 
-    public static int findLeft(int[] arr, int num) {
-        int n = arr.length;
-        int left = 0, right = n - 1;
+    public static int findRight(int[] arr, int num) {
+        int left = 0, right = arr.length - 1;
         int ans = -1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            if (arr[mid] >= num) {
+            if (arr[mid] <= num) {
                 ans = mid;
-                right = mid - 1;
-            } else {
                 left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
         return ans;

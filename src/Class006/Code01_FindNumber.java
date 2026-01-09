@@ -1,8 +1,8 @@
-package Class002;
+package Class006;
 
 import java.util.Arrays;
 
-public class Code03_FindRight {
+public class Code01_FindNumber {
     public static void main(String[] args) {
         int N = 100;
         int V = 1000;
@@ -13,8 +13,8 @@ public class Code03_FindRight {
             int[] arr = randomArray(n, V);
             Arrays.sort(arr);
             int num = (int) (Math.random() * V);
-            if (right(arr, num) != findRight(arr, num)) {
-                System.out.println("Error");
+            if (right(arr, num) != exist(arr, num)) {
+                System.out.println("Error!");
             }
         }
         System.out.println("Test End");
@@ -24,32 +24,38 @@ public class Code03_FindRight {
         int[] arr = new int[n];
         for (int i = 0; i < n; ++i) {
             int flag = (Math.random() < 0.5) ? 1 : -1;
-            arr[i] = (int) (Math.random() * v) *flag;
+            arr[i] = (int) (Math.random() * v) * flag;
         }
         return arr;
     }
 
-    public  static int right(int[] arr, int num) {
-        for (int i = arr.length - 1; i >= 0; --i) {
-            if (arr[i] <= num) {
-                return i;
+
+    // For validation
+    public static boolean right(int[] sortedArr, int num) {
+        for (int cur : sortedArr) {
+            if (cur == num) {
+                return true;
             }
         }
-        return -1;
+        return false;
     }
 
-    public static int findRight(int[] arr, int num) {
-        int left = 0, right = arr.length - 1;
-        int ans = -1;
+    public static boolean exist(int[] arr, int num) {
+        if (arr == null && arr.length == 0) {
+            return false;
+        }
+        int n = arr.length;
+        int left = 0, right = n - 1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            if (arr[mid] <= num) {
-                ans = mid;
+            if (arr[mid] == num) {
+                return true;
+            } else if (arr[mid] < num) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
             }
         }
-        return ans;
+        return false;
     }
 }
