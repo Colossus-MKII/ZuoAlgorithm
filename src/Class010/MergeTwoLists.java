@@ -28,12 +28,11 @@ public class MergeTwoLists {
                     if (cur1.val <= cur2.val) {
                         cur.next = cur1;
                         cur1 = cur1.next;
-                        cur = cur.next;
                     } else {
                         cur.next = cur2;
                         cur2 = cur2.next;
-                        cur = cur.next;
                     }
+                    cur = cur.next;
                 }
                 if (cur1 != null) {
                     cur.next = cur1;
