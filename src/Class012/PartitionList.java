@@ -1,6 +1,5 @@
 package Class012;
 
-import Class011.AddTwoNumbers;
 
 public class PartitionList {
     public static class ListNode {
